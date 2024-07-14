@@ -1,17 +1,21 @@
-#Question1
+#Q1
+install.packages("ggplot2")
 library(ggplot2)
 
 data(iris)
+
 ggplot(iris, aes(x = Sepal.Length, y = Petal.Length, color = Species)) +
   geom_point() +
-  labs(x = "Sepal Length", y = "Petal Length", title = "Scatterplot of Sepal Length vs. Petal Length") +
-  scale_color_manual(values = c("setosa" = "red", "versicolor" = "green", "virginica" = "blue"))
+  labs(x = "Sepal Length", y = "Petal Length", title = "Sepal Length vs. Petal Length") +
+  scale_color_manual(values = c("setosa" = "blue", "versicolor" = "green", "virginica" = "red"))
 
-
-#Question2
+#Q2
 library(ggplot2)
+
 data(txhousing)
+
 str(txhousing)
+
 summary(txhousing)
 
 missing_values <- sum(!complete.cases(txhousing))
@@ -32,18 +36,20 @@ ggplot(txhousing, aes(x = factor(year), fill = factor(month))) +
   labs(x = "Year", y = "Number of Houses Sold") +
   ggtitle("Barplot of Number of Houses Sold by Year and Month")
 
-
-
-#Question3
+#Q3
 library(ggplot2)
+
 titanic <- read.csv("titanic.csv")
 
 titanic <- na.omit(titanic)
-ggplot(titanic, aes(x = Fare, y = factor(Survived), fill = factor(Sex))) +
+
+final_Plot <- ggplot(titanic, aes(x = Fare, y = factor(Survived), fill = factor(Sex))) +
   geom_boxplot() +
-  scale_y_discrete(labels = c("Survived", "Died")) +
+  scale_y_discrete(labels = c("Died", "Survived")) +
   scale_fill_manual(values = c("male" = "lightblue", "female" = "pink")) +
   ylab("Survival") +
   xlab("Fare") +
-  ggtitle("Box Plot of Survival vs Fare by Gender") +
+  labs(title = "Fare vs Survival", 
+       subtitle = "Irrespective of Sex, richer people survived")+
   theme_minimal()
+print(final_Plot)
